@@ -251,25 +251,27 @@
         const zoneList = document.getElementById('zone-list');
 
         function updateZoneList(selectedUF) {
-            zoneList.innerHTML = ''; // Limpar as zonas anteriores
-            if (selectedUF && zonesData[selectedUF]) {
-                zonesData[selectedUF].forEach(zoneData => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = zoneData.link;
-                    link.textContent = zoneData.zone;
-                    listItem.appendChild(link);
-                    zoneList.appendChild(listItem);
-                });
-                zonesContainer.style.display = 'block';
-            } else if (!zonesData[selectedUF]) {
-                console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
-                zonesContainer.style.display = 'none';
-            } else {
-                zonesContainer.style.display = 'none';
-            }
-        }
+    zoneList.innerHTML = ''; // Limpar as zonas anteriores
 
+    if (selectedUF && zonesData[selectedUF]) {
+        zonesData[selectedUF].forEach(zoneData => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = zoneData.link;
+            link.textContent = zoneData.zone;
+            listItem.appendChild(link);
+            zoneList.appendChild(listItem);
+        });
+        zonesContainer.style.display = 'block';
+    } else {
+        if (!selectedUF) {
+            console.warn("Nenhuma UF foi selecionada.");
+        } else {
+            console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
+        }
+        zonesContainer.style.display = 'none';
+    }
+}
         ufSelect.addEventListener('change', () => {
             const selectedUF = ufSelect.value;
             updateZoneList(selectedUF);

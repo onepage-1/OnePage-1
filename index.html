@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleção de Zonas - BAT Brasil</title>
     <style>
+        select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f3f3;
@@ -13,7 +18,46 @@
             margin: 0;
             padding: 0;
         }
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 20px 0;
+    }
 
+    .dropdown select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        border: 2px solid #00539b;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown select:focus {
+        border-color: #003f74;
+        outline: none;
+    }
+
+    .dropdown select:hover {
+        background-color: #f0f8ff;
+    }
+
+    .dropdown::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 12px;
+        color: #00539b;
+    }
         header {
             background-color: #00539b; /* Azul BAT */
             color: #fff;
@@ -87,20 +131,20 @@
     </header>
     <div class="container">
         <div class="dropdown">
-            <label for="uf-select">Selecione a UF:</label>
-            <select id="uf-select">
-                <option value="" selected>Escolha...</option>
-                <option value="400">BH1</option>
-                <option value="401">JZF</option>
-                <option value="402">TRG</option>
-                <option value="403">MGS</option>
-                <option value="404">MGL</option>
-                <option value="405">BSB</option>
-                <option value="406">CGR</option>
-                <option value="407">CBA</option>
-                <option value="410">GYN</option>
-            </select>
-        </div>
+    <label for="uf-select">Selecione a UF:</label>
+    <select id="uf-select">
+        <option value="" selected>Escolha...</option>
+        <option value="400">BH1</option>
+        <option value="401">JZF</option>
+        <option value="402">TRG</option>
+        <option value="403">MGS</option>
+        <option value="404">MGL</option>
+        <option value="405">BSB</option>
+        <option value="406">CGR</option>
+        <option value="407">CBA</option>
+        <option value="410">GYN</option>
+    </select>
+</div>
         <div class="zones" id="zones">
             <h2>Zonas Disponíveis</h2>
             <ul class="zone-list" id="zone-list">

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seleção de Zonas - BAT Brasil</title>
+    <title>Menu Dropdown</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         select {
         -webkit-appearance: none;
@@ -131,20 +132,19 @@
     </header>
     <div class="container">
         <div class="dropdown">
-    <label for="uf-select">Selecione a UF:</label>
-    <select id="uf-select">
-        <option value="" selected>Escolha...</option>
-        <option value="400">BH1</option>
-        <option value="401">JZF</option>
-        <option value="402">TRG</option>
-        <option value="403">MGS</option>
-        <option value="404">MGL</option>
-        <option value="405">BSB</option>
-        <option value="406">CGR</option>
-        <option value="407">CBA</option>
-        <option value="410">GYN</option>
-    </select>
-</div>
+        <button class="dropdown-toggle">Selecione a UF</button>
+        <ul class="dropdown-menu">
+            <li><a href="400">BH1</a></li>
+            <li><a href="401">JZF</a></li>
+            <li><a href="402">TRG</a></li>
+            <li><a href="403">MGS</a></li>
+            <li><a href="404">MGL</a></li>
+            <li><a href="405">BSB</a></li>
+            <li><a href="406">CGR</a></li>
+            <li><a href="407">CBA</a></li>
+            <li><a href="410">GYN</a></li>
+        </ul>
+    </div>
         <div class="zones" id="zones">
             <h2>Zonas Disponíveis</h2>
             <ul class="zone-list" id="zone-list">
@@ -152,7 +152,7 @@
             </ul>
         </div>
     </div>
-
+<script src="script.js"></script>
     <script>
         const zonesData = {
             "400": [

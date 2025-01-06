@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dropdown</title>
-    
     <style>
-        /* Removi o seletor select aqui, para evitar conflitos */
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f3f3;
@@ -30,17 +28,17 @@
 
         .container {
             width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 800px; /* Definição de largura máxima */
+            margin: 0 auto; /* Centraliza o container */
         }
-        /* Estilos do dropdown personalizado */
+
         .dropdown {
             position: relative;
             display: inline-block;
             margin: 20px 0;
         }
 
-        .dropdown-toggle {
+         .dropdown-toggle {
             padding: 10px 15px;
             font-size: 16px;
             font-weight: bold;
@@ -53,7 +51,11 @@
             appearance: none; /* Remove o visual padrão */
             -webkit-appearance: none; /* Para o Safari e Chrome */
              -moz-appearance: none; /* Para o Firefox */
+             display: flex;
+            justify-content: space-between; /* Alinha texto à esquerda e seta à direita */
+            align-items: center; /* Alinha verticalmente os itens */
         }
+
 
         .dropdown-toggle:focus {
             border-color: #003f74;
@@ -65,17 +67,12 @@
         }
 
         .dropdown::after {
-        content: "▼";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        font-size: 12px;
-        color: #00539b;
-    }
+            content: "▼";
+            font-size: 12px;
+            color: #00539b;
+        }
 
-        .dropdown-menu {
+         .dropdown-menu {
             position: absolute;
             display: none;
             background-color: #fff;
@@ -83,19 +80,19 @@
             border-radius: 4px;
             padding: 5px 0;
             z-index: 1000;
-            min-width: 160px; /* Ajuste conforme necessário */
+            min-width: 160px;
             margin-top: 5px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             list-style: none;
             padding: 0;
         }
 
-       .dropdown-menu li {
+         .dropdown-menu li {
             padding: 8px 16px;
         }
 
         .dropdown-menu a {
-            display: block;
+             display: block;
             text-decoration: none;
             color: #333;
             cursor: pointer;
@@ -105,11 +102,11 @@
             background-color: #f0f0f0;
         }
 
-        .dropdown.show .dropdown-menu {
-            display: block;
+         .dropdown.show .dropdown-menu {
+             display: block;
         }
 
-        .zones {
+       .zones {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
             margin-top: 20px;
@@ -120,9 +117,19 @@
             padding: 0;
         }
 
+        /* Estilo para as caixas de zonas */
         .zone-list li {
             margin: 10px 0;
+            display: block; /* Ou 'inline-block' se desejar que as caixas fiquem lado a lado */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: left; /* Alinha o texto à esquerda dentro da caixa */
+             background-color: #fff; /* Adiciona um fundo branco */
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adiciona uma leve sombra */
+
         }
+
 
         .zone-list a {
             text-decoration: none;
@@ -134,7 +141,7 @@
             text-decoration: underline;
         }
 
-        @keyframes fadeIn {
+         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
@@ -307,7 +314,7 @@
                 { zone: "3990_410_192", link: "https://example.com/zone/3990_410_192" },
                 { zone: "3990_410_193", link: "https://example.com/zone/3990_410_193" }
             ]
-            // Cada zona com seu link :)
+             // Cada zona com seu link :)
           };
 
         const dropdown = document.querySelector('.dropdown');
@@ -318,10 +325,10 @@
 
         // Função para atualizar a lista de zonas
         function updateZoneList(selectedUF) {
-             zoneList.innerHTML = ''; // Limpar as zonas anteriores
+            zoneList.innerHTML = ''; // Limpar as zonas anteriores
 
             if (selectedUF && zonesData[selectedUF]) {
-               zonesData[selectedUF].forEach(zoneData => {
+                zonesData[selectedUF].forEach(zoneData => {
                     const listItem = document.createElement('li');
                     const link = document.createElement('a');
                     link.href = zoneData.link;
@@ -331,7 +338,7 @@
                 });
                 zonesContainer.style.display = 'block';
             } else {
-                 if (!selectedUF) {
+                  if (!selectedUF) {
                     console.warn("Nenhuma UF foi selecionada.");
                  } else {
                     console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
@@ -340,13 +347,14 @@
             }
         }
 
-        // Evento para abrir/fechar o dropdown
-         dropdownToggle.addEventListener('click', () => {
-             dropdown.classList.toggle('show');
-         });
 
-         // Evento para selecionar um item do dropdown
-          dropdownMenu.addEventListener('click', (event) => {
+        // Evento para abrir/fechar o dropdown
+        dropdownToggle.addEventListener('click', () => {
+            dropdown.classList.toggle('show');
+        });
+
+        // Evento para selecionar um item do dropdown
+         dropdownMenu.addEventListener('click', (event) => {
             if (event.target.tagName === 'A') {
             event.preventDefault(); // Evita o comportamento padrão do link
             const selectedUF = event.target.getAttribute('data-uf');
@@ -354,14 +362,14 @@
             dropdown.classList.remove('show'); // Fecha o dropdown
             updateZoneList(selectedUF); // Atualiza a lista de zonas
             }
-         });
-         // Evento para fechar o dropdown ao clicar fora
-          document.addEventListener('click', (event) => {
-             if (!dropdown.contains(event.target)) {
+        });
+        // Evento para fechar o dropdown ao clicar fora
+        document.addEventListener('click', (event) => {
+            if (!dropdown.contains(event.target)) {
                 dropdown.classList.remove('show');
-             }
-         });
-
+            }
+        });
     </script>
 </body>
+
 </html>

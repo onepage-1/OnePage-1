@@ -28,8 +28,8 @@
 
         .container {
             width: 90%;
-            max-width: 800px; /* Definição de largura máxima */
-            margin: 0 auto; /* Centraliza o container */
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .dropdown {
@@ -38,7 +38,7 @@
             margin: 20px 0;
         }
 
-         .dropdown-toggle {
+        .dropdown-toggle {
             padding: 10px 15px;
             font-size: 16px;
             font-weight: bold;
@@ -48,14 +48,13 @@
             color: #333;
             cursor: pointer;
             transition: all 0.3s ease;
-            appearance: none; /* Remove o visual padrão */
-            -webkit-appearance: none; /* Para o Safari e Chrome */
-             -moz-appearance: none; /* Para o Firefox */
-             display: flex;
-            justify-content: space-between; /* Alinha texto à esquerda e seta à direita */
-            align-items: center; /* Alinha verticalmente os itens */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
 
         .dropdown-toggle:focus {
             border-color: #003f74;
@@ -72,7 +71,7 @@
             color: #00539b;
         }
 
-         .dropdown-menu {
+        .dropdown-menu {
             position: absolute;
             display: none;
             background-color: #fff;
@@ -82,17 +81,17 @@
             z-index: 1000;
             min-width: 160px;
             margin-top: 5px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             list-style: none;
             padding: 0;
         }
 
-         .dropdown-menu li {
+        .dropdown-menu li {
             padding: 8px 16px;
         }
 
         .dropdown-menu a {
-             display: block;
+            display: block;
             text-decoration: none;
             color: #333;
             cursor: pointer;
@@ -102,11 +101,11 @@
             background-color: #f0f0f0;
         }
 
-         .dropdown.show .dropdown-menu {
-             display: block;
+        .dropdown.show .dropdown-menu {
+            display: block;
         }
 
-       .zones {
+        .zones {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
             margin-top: 20px;
@@ -120,16 +119,19 @@
         /* Estilo para as caixas de zonas */
         .zone-list li {
             margin: 10px 0;
-            display: block; /* Ou 'inline-block' se desejar que as caixas fiquem lado a lado */
+            display: inline-block; /* Alterado para inline-block */
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
-            text-align: left; /* Alinha o texto à esquerda dentro da caixa */
-             background-color: #fff; /* Adiciona um fundo branco */
-              box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adiciona uma leve sombra */
+            text-align: left;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+             max-width: 200px;  /* Defina a largura máxima das caixas */
+              vertical-align: middle; /* Centraliza o texto verticalmente */
+              width: 100%;
+              box-sizing: border-box;
 
         }
-
 
         .zone-list a {
             text-decoration: none;
@@ -141,7 +143,7 @@
             text-decoration: underline;
         }
 
-         @keyframes fadeIn {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
             }
@@ -181,8 +183,8 @@
     </div>
 
     <script>
-       const zonesData = {
-            "400": [
+        const zonesData = {
+             "400": [
                 { zone: "3990_400_001", link: "https://example.com/zone/3990_400_001" },
                 { zone: "3990_400_003", link: "https://example.com/zone/3990_400_003" },
                 { zone: "3990_400_004", link: "https://example.com/zone/3990_400_004" },
@@ -316,7 +318,6 @@
             ]
              // Cada zona com seu link :)
           };
-
         const dropdown = document.querySelector('.dropdown');
         const dropdownToggle = document.querySelector('.dropdown-toggle');
         const dropdownMenu = document.querySelector('.dropdown-menu');
@@ -347,14 +348,13 @@
             }
         }
 
-
         // Evento para abrir/fechar o dropdown
         dropdownToggle.addEventListener('click', () => {
             dropdown.classList.toggle('show');
         });
 
-        // Evento para selecionar um item do dropdown
-         dropdownMenu.addEventListener('click', (event) => {
+         // Evento para selecionar um item do dropdown
+        dropdownMenu.addEventListener('click', (event) => {
             if (event.target.tagName === 'A') {
             event.preventDefault(); // Evita o comportamento padrão do link
             const selectedUF = event.target.getAttribute('data-uf');

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dropdown</title>
-    <link rel="stylesheet" href="style.css">
+    
     <style>
-        select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
+        /* Removi o seletor select aqui, para evitar conflitos */
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f3f3;
@@ -19,48 +16,9 @@
             margin: 0;
             padding: 0;
         }
-        .dropdown {
-        position: relative;
-        display: inline-block;
-        margin: 20px 0;
-    }
 
-    .dropdown select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        font-weight: bold;
-        border: 2px solid #00539b;
-        border-radius: 8px;
-        background-color: #fff;
-        color: #333;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .dropdown select:focus {
-        border-color: #003f74;
-        outline: none;
-    }
-
-    .dropdown select:hover {
-        background-color: #f0f8ff;
-    }
-
-    .dropdown::after {
-        content: "▼";
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        font-size: 12px;
-        color: #00539b;
-    }
         header {
-            background-color: #00539b; /* Azul BAT */
+            background-color: #00539b;
             color: #fff;
             padding: 20px 0;
             margin-bottom: 20px;
@@ -75,19 +33,80 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
+        /* Estilos do dropdown personalizado */
         .dropdown {
             position: relative;
             display: inline-block;
             margin: 20px 0;
         }
 
-        .dropdown select {
-            padding: 10px;
+        .dropdown-toggle {
+            padding: 10px 15px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            font-weight: bold;
+            border: 2px solid #00539b;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
             cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none; /* Remove o visual padrão */
+            -webkit-appearance: none; /* Para o Safari e Chrome */
+             -moz-appearance: none; /* Para o Firefox */
+        }
+
+        .dropdown-toggle:focus {
+            border-color: #003f74;
+            outline: none;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: #f0f8ff;
+        }
+
+        .dropdown::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 12px;
+        color: #00539b;
+    }
+
+        .dropdown-menu {
+            position: absolute;
+            display: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px 0;
+            z-index: 1000;
+            min-width: 160px; /* Ajuste conforme necessário */
+            margin-top: 5px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            list-style: none;
+            padding: 0;
+        }
+
+       .dropdown-menu li {
+            padding: 8px 16px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
         }
 
         .zones {
@@ -125,6 +144,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <img src="https://i0.wp.com/greatplacetowork.me/wp-content/uploads/2023/09/BAT-1.png?fit=3467%2C2096&ssl=1" alt="Logo BAT Brasil">
@@ -132,19 +152,19 @@
     </header>
     <div class="container">
         <div class="dropdown">
-        <button class="dropdown-toggle">Selecione a UF</button>
-        <ul class="dropdown-menu">
-            <li><a href="400">BH1</a></li>
-            <li><a href="401">JZF</a></li>
-            <li><a href="402">TRG</a></li>
-            <li><a href="403">MGS</a></li>
-            <li><a href="404">MGL</a></li>
-            <li><a href="405">BSB</a></li>
-            <li><a href="406">CGR</a></li>
-            <li><a href="407">CBA</a></li>
-            <li><a href="410">GYN</a></li>
-        </ul>
-    </div>
+            <button class="dropdown-toggle">Selecione a UF</button>
+            <ul class="dropdown-menu">
+                <li><a href="#" data-uf="400">BH1</a></li>
+                <li><a href="#" data-uf="401">JZF</a></li>
+                <li><a href="#" data-uf="402">TRG</a></li>
+                <li><a href="#" data-uf="403">MGS</a></li>
+                <li><a href="#" data-uf="404">MGL</a></li>
+                <li><a href="#" data-uf="405">BSB</a></li>
+                <li><a href="#" data-uf="406">CGR</a></li>
+                <li><a href="#" data-uf="407">CBA</a></li>
+                <li><a href="#" data-uf="410">GYN</a></li>
+            </ul>
+        </div>
         <div class="zones" id="zones">
             <h2>Zonas Disponíveis</h2>
             <ul class="zone-list" id="zone-list">
@@ -152,9 +172,9 @@
             </ul>
         </div>
     </div>
-<script src="script.js"></script>
+
     <script>
-        const zonesData = {
+       const zonesData = {
             "400": [
                 { zone: "3990_400_001", link: "https://example.com/zone/3990_400_001" },
                 { zone: "3990_400_003", link: "https://example.com/zone/3990_400_003" },
@@ -290,36 +310,58 @@
             // Cada zona com seu link :)
           };
 
-        const ufSelect = document.getElementById('uf-select');
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
         const zonesContainer = document.getElementById('zones');
         const zoneList = document.getElementById('zone-list');
 
+        // Função para atualizar a lista de zonas
         function updateZoneList(selectedUF) {
-    zoneList.innerHTML = ''; // Limpar as zonas anteriores
+             zoneList.innerHTML = ''; // Limpar as zonas anteriores
 
-    if (selectedUF && zonesData[selectedUF]) {
-        zonesData[selectedUF].forEach(zoneData => {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = zoneData.link;
-            link.textContent = zoneData.zone;
-            listItem.appendChild(link);
-            zoneList.appendChild(listItem);
-        });
-        zonesContainer.style.display = 'block';
-    } else {
-        if (!selectedUF) {
-            console.warn("Nenhuma UF foi selecionada.");
-        } else {
-            console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
+            if (selectedUF && zonesData[selectedUF]) {
+               zonesData[selectedUF].forEach(zoneData => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = zoneData.link;
+                    link.textContent = zoneData.zone;
+                    listItem.appendChild(link);
+                    zoneList.appendChild(listItem);
+                });
+                zonesContainer.style.display = 'block';
+            } else {
+                 if (!selectedUF) {
+                    console.warn("Nenhuma UF foi selecionada.");
+                 } else {
+                    console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
+                 }
+                zonesContainer.style.display = 'none';
+            }
         }
-        zonesContainer.style.display = 'none';
-    }
-}
-        ufSelect.addEventListener('change', () => {
-            const selectedUF = ufSelect.value;
-            updateZoneList(selectedUF);
-        });
+
+        // Evento para abrir/fechar o dropdown
+         dropdownToggle.addEventListener('click', () => {
+             dropdown.classList.toggle('show');
+         });
+
+         // Evento para selecionar um item do dropdown
+          dropdownMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+            event.preventDefault(); // Evita o comportamento padrão do link
+            const selectedUF = event.target.getAttribute('data-uf');
+            dropdownToggle.textContent = event.target.textContent; // Atualiza o texto do botão
+            dropdown.classList.remove('show'); // Fecha o dropdown
+            updateZoneList(selectedUF); // Atualiza a lista de zonas
+            }
+         });
+         // Evento para fechar o dropdown ao clicar fora
+          document.addEventListener('click', (event) => {
+             if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+             }
+         });
+
     </script>
 </body>
 </html>

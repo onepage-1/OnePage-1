@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Zonas - BAT Brasil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #00539b; /* Azul BAT */
+            color: #fff;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            max-width: 200px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .dropdown select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .zones {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            margin-top: 20px;
+        }
+
+        .zone-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .zone-list li {
+            margin: 10px 0;
+        }
+
+        .zone-list a {
+            text-decoration: none;
+            color: #00539b;
+            font-weight: bold;
+        }
+
+        .zone-list a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Bat_brazil_logo.png" alt="Logo BAT Brasil">
+        <h1>Seleção de Zonas - BAT Brasil</h1>
+    </header>
+    <div class="container">
+        <div class="dropdown">
+            <label for="uf-select">Selecione a UF:</label>
+            <select id="uf-select">
+                <option value="" selected>Escolha...</option>
+                <option value="400">BH1</option>
+                <option value="401">JZF</option>
+                <option value="402">TRG</option>
+                <option value="403">MGS</option>
+                <option value="404">MGL</option>
+                <option value="405">BSB</option>
+                <option value="406">CGR</option>
+                <option value="407">CBA</option>
+                <option value="410">GYN</option>
+            </select>
+        </div>
+        <div class="zones" id="zones">
+            <h2>Zonas Disponíveis</h2>
+            <ul class="zone-list" id="zone-list">
+                <!-- As zonas serão adicionadas aqui dinamicamente -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const zonesData = {
+            "400": [
+                { zone: "3990_400_001", link: "https://example.com/zone/3990_400_001" },
+                { zone: "3990_400_003", link: "https://example.com/zone/3990_400_003" },
+                { zone: "3990_400_004", link: "https://example.com/zone/3990_400_004" },
+                { zone: "3990_400_005", link: "https://example.com/zone/3990_400_005" },
+                { zone: "3990_400_007", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_008", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_009", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_010", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_011", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_012", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_013", link: "https://example.com/zone/3990_400_007" },
+                { zone: "3990_400_014", link: "https://example.com/zone/3990_400_007" }
+            ],
+            "401": [
+                { zone: "3990_401_021", link: "https://example.com/zone/3990_401_021" },
+                { zone: "3990_401_022", link: "https://example.com/zone/3990_401_022" },
+                { zone: "3990_401_023", link: "https://example.com/zone/3990_401_023" },
+                { zone: "3990_401_024", link: "https://example.com/zone/3990_401_024" },
+                { zone: "3990_401_025", link: "https://example.com/zone/3990_401_025" },
+                { zone: "3990_401_026", link: "https://example.com/zone/3990_401_025" },
+                { zone: "3990_401_027", link: "https://example.com/zone/3990_401_025" },
+                { zone: "3990_401_028", link: "https://example.com/zone/3990_401_025" },
+                { zone: "3990_401_029", link: "https://example.com/zone/3990_401_025" },
+                { zone: "3990_401_030", link: "https://example.com/zone/3990_401_025" }
+            ],
+            "402": [
+                { zone: "3990_402_041", link: "https://example.com/zone/3990_402_041" },
+                { zone: "3990_402_043", link: "https://example.com/zone/3990_402_043" },
+                { zone: "3990_402_044", link: "https://example.com/zone/3990_402_044" },
+                { zone: "3990_402_046", link: "https://example.com/zone/3990_402_046" },
+                { zone: "3990_402_047", link: "https://example.com/zone/3990_402_047" },
+                { zone: "3990_402_048", link: "https://example.com/zone/3990_402_048" },
+                { zone: "3990_402_049", link: "https://example.com/zone/3990_402_049" },
+                { zone: "3990_402_050", link: "https://example.com/zone/3990_402_050" },
+                { zone: "3990_402_051", link: "https://example.com/zone/3990_402_051" },
+                { zone: "3990_402_052", link: "https://example.com/zone/3990_402_052" },
+                { zone: "3990_402_054", link: "https://example.com/zone/3990_402_054" },
+                { zone: "3990_402_056", link: "https://example.com/zone/3990_402_056" }
+            ],
+            "403": [
+                { zone: "3990_403_061", link: "https://example.com/zone/3990_403_061" },
+                { zone: "3990_403_062", link: "https://example.com/zone/3990_403_062" },
+                { zone: "3990_403_063", link: "https://example.com/zone/3990_403_063" },
+                { zone": "3990_403_064", link: "https://example.com/zone/3990_403_064" },
+                { zone: "3990_403_066", link: "https://example.com/zone/3990_403_066" },
+                { zone: "3990_403_071", link: "https://example.com/zone/3990_403_071" },
+                { zone: "3990_403_072", link: "https://example.com/zone/3990_403_072" },
+                { zone: "3990_403_073", link: "https://example.com/zone/3990_403_073" },
+                { zone: "3990_403_074", link: "https://example.com/zone/3990_403_074" },
+                { zone: "3990_403_075", link: "https://example.com/zone/3990_403_075" },
+                { zone: "3990_403_076", link: "https://example.com/zone/3990_403_076" },
+                { zone: "3990_403_077", link: "https://example.com/zone/3990_403_077" },
+                { zone: "3990_403_078", link: "https://example.com/zone/3990_403_078" },
+                { zone: "3990_403_079", link: "https://example.com/zone/3990_403_079" }
+            ],
+            "404": [
+                { zone: "3990_404_082", link: "https://example.com/zone/3990_404_082" },
+                { zone: "3990_404_083", link: "https://example.com/zone/3990_404_083" },
+                { zone: "3990_404_084", link: "https://example.com/zone/3990_404_084" },
+                { zone: "3990_404_085", link: "https://example.com/zone/3990_404_085" },
+                { zone: "3990_404_086", link: "https://example.com/zone/3990_404_086" },
+                { zone: "3990_404_087", link: "https://example.com/zone/3990_404_087" },
+                { zone: "3990_404_090", link: "https://example.com/zone/3990_404_090" },
+                { zone: "3990_404_091", link: "https://example.com/zone/3990_404_091" },
+                { zone: "3990_404_092", link: "https://example.com/zone/3990_404_092" },
+                { zone: "3990_404_093", link: "https://example.com/zone/3990_404_093" },
+                { zone: "3990_404_094", link: "https://example.com/zone/3990_404_094" },
+                { zone: "3990_404_095", link: "https://example.com/zone/3990_404_095" }
+            ],
+            "405": [
+                { zone: "3990_405_101", link: "https://example.com/zone/3990_405_101" },
+                { zone: "3990_405_102", link: "https://example.com/zone/3990_405_102" },
+                { zone: "3990_405_104", link: "https://example.com/zone/3990_405_104" },
+                { zone: "3990_405_105", link: "https://example.com/zone/3990_405_105" },
+                { zone: "3990_405_106", link: "https://example.com/zone/3990_405_106" },
+                { zone: "3990_405_107", link: "https://example.com/zone/3990_405_107" },
+                { zone: "3990_405_108", link: "https://example.com/zone/3990_405_108" },
+                { zone: "3990_405_109", link: "https://example.com/zone/3990_405_109" },
+                { zone: "3990_405_110", link: "https://example.com/zone/3990_405_110" },
+                { zone: "3990_405_116", link: "https://example.com/zone/3990_405_116" },
+                { zone: "3990_405_117", link: "https://example.com/zone/3990_405_117" },
+                { zone: "3990_405_118", link: "https://example.com/zone/3990_405_118" }
+                      ],
+                      "406": [
+                { zone: "3990_406_130", link: "https://example.com/zone/3990_406_130" },
+                { zone: "3990_406_131", link: "https://example.com/zone/3990_406_131" },
+                { zone: "3990_406_132", link: "https://example.com/zone/3990_406_132" },
+                { zone: "3990_406_133", link: "https://example.com/zone/3990_406_133" },
+                { zone: "3990_406_134", link: "https://example.com/zone/3990_406_134" },
+                { zone: "3990_406_135", link: "https://example.com/zone/3990_406_135" },
+                { zone: "3990_406_136", link: "https://example.com/zone/3990_406_136" },
+                { zone: "3990_406_137", link: "https://example.com/zone/3990_406_137" },
+                { zone: "3990_406_138", link: "https://example.com/zone/3990_406_138" },
+                { zone: "3990_406_139", link: "https://example.com/zone/3990_406_139" },
+                { zone: "3990_406_140", link: "https://example.com/zone/3990_406_140" },
+                { zone: "3990_406_141", link: "https://example.com/zone/3990_406_141" },
+                { zone: "3990_406_142", link: "https://example.com/zone/3990_406_142" }
+            ],
+            "407": [
+                { zone: "3990_407_141", link: "https://example.com/zone/3990_407_141" },
+                { zone: "3990_407_142", link: "https://example.com/zone/3990_407_142" },
+                { zone: "3990_407_143", link: "https://example.com/zone/3990_407_143" },
+                { zone: "3990_407_145", link: "https://example.com/zone/3990_407_145" },
+                { zone: "3990_407_146", link: "https://example.com/zone/3990_407_146" },
+                { zone: "3990_407_147", link: "https://example.com/zone/3990_407_147" },
+                { zone: "3990_407_148", link: "https://example.com/zone/3990_407_148" },
+                { zone: "3990_407_149", link: "https://example.com/zone/3990_407_149" },
+                { zone: "3990_407_150", link: "https://example.com/zone/3990_407_150" },
+                { zone: "3990_407_151", link: "https://example.com/zone/3990_407_151" },
+                { zone: "3990_407_152", link: "https://example.com/zone/3990_407_152" },
+                { zone: "3990_407_153", link: "https://example.com/zone/3990_407_153" },
+                { zone: "3990_407_154", link: "https://example.com/zone/3990_407_154" },
+                { zone: "3990_407_155", link: "https://example.com/zone/3990_407_155" },
+                { zone: "3990_407_156", link: "https://example.com/zone/3990_407_156" },
+                { zone: "3990_407_157", link: "https://example.com/zone/3990_407_157" }
+            ],
+            "410": [
+                { zone: "3990_410_180", link: "https://example.com/zone/3990_410_180" },
+                { zone: "3990_410_181", link: "https://example.com/zone/3990_410_181" },
+                { zone: "3990_410_182", link: "https://example.com/zone/3990_410_182" },
+                { zone: "3990_410_183", link: "https://example.com/zone/3990_410_183" },
+                { zone: "3990_410_184", link: "https://example.com/zone/3990_410_184" },
+                { zone: "3990_410_185", link: "https://example.com/zone/3990_410_185" },
+                { zone: "3990_410_186", link: "https://example.com/zone/3990_410_186" },
+                { zone: "3990_410_187", link: "https://example.com/zone/3990_410_187" },
+                { zone: "3990_410_188", link: "https://example.com/zone/3990_410_188" },
+                { zone: "3990_410_189", link: "https://example.com/zone/3990_410_189" },
+                { zone: "3990_410_190", link: "https://example.com/zone/3990_410_190" },
+                { zone: "3990_410_192", link: "https://example.com/zone/3990_410_192" },
+                { zone: "3990_410_193", link: "https://example.com/zone/3990_410_193" }
+                      ]
+
+            // Cada zona com seu link :)
+          };
+
+        const ufSelect = document.getElementById('uf-select');
+        const zonesContainer = document.getElementById('zones');
+        const zoneList = document.getElementById('zone-list');
+
+        ufSelect.addEventListener('change', () => {
+            const selectedUF = ufSelect.value;
+            zoneList.innerHTML = ''; // Limpar as zonas anteriores
+            if (selectedUF && zonesData[selectedUF]) {
+                zonesData[selectedUF].forEach(zoneData => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = zoneData.link;
+                    link.textContent = zoneData.zone;
+                    listItem.appendChild(link);
+                    zoneList.appendChild(listItem);
+                });
+                zonesContainer.style.display = 'block';
+            } else {
+                zonesContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

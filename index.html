@@ -82,7 +82,7 @@
 </head>
 <body>
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Bat_brazil_logo.png" alt="Logo BAT Brasil">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Bat_brazil_logo.png" alt="Logo BAT Brasil">
         <h1>Seleção de Zonas - BAT Brasil</h1>
     </header>
     <div class="container">
@@ -194,8 +194,8 @@
                 { zone: "3990_405_116", link: "https://example.com/zone/3990_405_116" },
                 { zone: "3990_405_117", link: "https://example.com/zone/3990_405_117" },
                 { zone: "3990_405_118", link: "https://example.com/zone/3990_405_118" }
-                      ],
-                      "406": [
+            ],
+            "406": [
                 { zone: "3990_406_130", link: "https://example.com/zone/3990_406_130" },
                 { zone: "3990_406_131", link: "https://example.com/zone/3990_406_131" },
                 { zone: "3990_406_132", link: "https://example.com/zone/3990_406_132" },
@@ -242,8 +242,7 @@
                 { zone: "3990_410_190", link: "https://example.com/zone/3990_410_190" },
                 { zone: "3990_410_192", link: "https://example.com/zone/3990_410_192" },
                 { zone: "3990_410_193", link: "https://example.com/zone/3990_410_193" }
-                      ]
-
+            ]
             // Cada zona com seu link :)
           };
 
@@ -251,8 +250,7 @@
         const zonesContainer = document.getElementById('zones');
         const zoneList = document.getElementById('zone-list');
 
-        ufSelect.addEventListener('change', () => {
-            const selectedUF = ufSelect.value;
+        function updateZoneList(selectedUF) {
             zoneList.innerHTML = ''; // Limpar as zonas anteriores
             if (selectedUF && zonesData[selectedUF]) {
                 zonesData[selectedUF].forEach(zoneData => {
@@ -264,9 +262,17 @@
                     zoneList.appendChild(listItem);
                 });
                 zonesContainer.style.display = 'block';
+            } else if (!zonesData[selectedUF]) {
+                console.error(`Nenhum dado encontrado para a UF selecionada: ${selectedUF}`);
+                zonesContainer.style.display = 'none';
             } else {
                 zonesContainer.style.display = 'none';
             }
+        }
+
+        ufSelect.addEventListener('change', () => {
+            const selectedUF = ufSelect.value;
+            updateZoneList(selectedUF);
         });
     </script>
 </body>
